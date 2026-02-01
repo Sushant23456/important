@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will you be my Valentine? 💕</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fad0c4 100%);
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body.success-view {
+      justify-content: flex-start;
+      padding: 2rem 1rem 4rem;
+      overflow-y: auto;
+    }
+
+    .hearts-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: 0;
+      font-size: 20px;
+      opacity: 0;
+      transform: translateY(0);
+      animation: float 2.6s ease-in-out infinite;
+    }
+
+    .heart:nth-child(1)  { left: 5%;   animation-delay: 0s;    animation-duration: 2.5s; }
+    .heart:nth-child(2)  { left: 12%;  animation-delay: 0.2s;  animation-duration: 2.8s; }
+    .heart:nth-child(3)  { left: 18%;  animation-delay: 0.4s;  animation-duration: 2.4s; }
+    .heart:nth-child(4)  { left: 24%;  animation-delay: 0.1s;  animation-duration: 2.9s; }
+    .heart:nth-child(5)  { left: 30%;  animation-delay: 0.5s;  animation-duration: 2.6s; }
+    .heart:nth-child(6)  { left: 36%;  animation-delay: 0.6s;  animation-duration: 2.7s; }
+    .heart:nth-child(7)  { left: 42%;  animation-delay: 0.1s;  animation-duration: 2.5s; }
+    .heart:nth-child(8)  { left: 48%;  animation-delay: 0.3s;  animation-duration: 2.3s; }
+    .heart:nth-child(9)  { left: 54%;  animation-delay: 0.5s;  animation-duration: 2.8s; }
+    .heart:nth-child(10) { left: 60%;  animation-delay: 0.2s;  animation-duration: 2.4s; }
+    .heart:nth-child(11) { left: 66%;  animation-delay: 0.4s;  animation-duration: 2.6s; }
+    .heart:nth-child(12) { left: 72%;  animation-delay: 0.7s;  animation-duration: 2.5s; }
+    .heart:nth-child(13) { left: 78%;  animation-delay: 0s;    animation-duration: 2.7s; }
+    .heart:nth-child(14) { left: 84%;  animation-delay: 0.3s;  animation-duration: 2.4s; }
+    .heart:nth-child(15) { left: 90%;  animation-delay: 0.6s;  animation-duration: 2.8s; }
+    .heart:nth-child(16) { left: 96%;  animation-delay: 0.15s; animation-duration: 2.3s; }
+    .heart:nth-child(17) { left: 8%;   animation-delay: 0.8s;  animation-duration: 2.6s; }
+    .heart:nth-child(18) { left: 22%;  animation-delay: 0.9s;  animation-duration: 2.5s; }
+    .heart:nth-child(19) { left: 52%;  animation-delay: 0.7s;  animation-duration: 2.9s; }
+    .heart:nth-child(20) { left: 70%;  animation-delay: 1s;    animation-duration: 2.3s; }
+    .heart:nth-child(21) { left: 88%;  animation-delay: 0.85s; animation-duration: 2.6s; }
+    .heart:nth-child(22) { left: 15%;  animation-delay: 0.95s; animation-duration: 2.7s; }
+    .heart:nth-child(23) { left: 45%;  animation-delay: 0.55s; animation-duration: 2.4s; }
+    .heart:nth-child(24) { left: 82%;  animation-delay: 0.65s; animation-duration: 2.8s; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3; }
+    }
+
+    /* Floating photos background – bottom to top, faded (only on success page) */
+    .photos-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+    }
+
+    body.success-view .photos-bg {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .photos-bg .float-photo {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 8px;
+      opacity: 0.22;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      animation: floatPhoto 18s linear infinite;
+      bottom: -100px;
+    }
+
+    .photos-bg .float-photo:nth-child(1)  { left: 2%;   animation-delay: 0s;    animation-duration: 16s; }
+    .photos-bg .float-photo:nth-child(2)  { left: 8%;   animation-delay: 2s;    animation-duration: 20s; }
+    .photos-bg .float-photo:nth-child(3)  { left: 14%;  animation-delay: 4s;    animation-duration: 17s; }
+    .photos-bg .float-photo:nth-child(4)  { left: 20%;  animation-delay: 1s;    animation-duration: 19s; }
+    .photos-bg .float-photo:nth-child(5)  { left: 26%;  animation-delay: 5s;    animation-duration: 21s; }
+    .photos-bg .float-photo:nth-child(6)  { left: 32%;  animation-delay: 3s;    animation-duration: 15s; }
+    .photos-bg .float-photo:nth-child(7)  { left: 38%;  animation-delay: 6s;    animation-duration: 18s; }
+    .photos-bg .float-photo:nth-child(8)  { left: 44%;  animation-delay: 0.5s;  animation-duration: 22s; }
+    .photos-bg .float-photo:nth-child(9)  { left: 50%;  animation-delay: 2.5s;  animation-duration: 16s; }
+    .photos-bg .float-photo:nth-child(10) { left: 56%;  animation-delay: 5.5s;  animation-duration: 19s; }
+    .photos-bg .float-photo:nth-child(11) { left: 62%;  animation-delay: 1.5s;  animation-duration: 17s; }
+    .photos-bg .float-photo:nth-child(12) { left: 68%;  animation-delay: 4.5s;  animation-duration: 20s; }
+    .photos-bg .float-photo:nth-child(13) { left: 74%;  animation-delay: 3.5s;  animation-duration: 14s; }
+    .photos-bg .float-photo:nth-child(14) { left: 80%;  animation-delay: 6.5s;  animation-duration: 21s; }
+    .photos-bg .float-photo:nth-child(15) { left: 86%;  animation-delay: 0.8s;  animation-duration: 18s; }
+    .photos-bg .float-photo:nth-child(16) { left: 92%;  animation-delay: 2.8s;  animation-duration: 16s; }
+    .photos-bg .float-photo:nth-child(17) { left: 6%;   animation-delay: 7s;    animation-duration: 19s; }
+    .photos-bg .float-photo:nth-child(18) { left: 18%;  animation-delay: 8s;    animation-duration: 15s; }
+    .photos-bg .float-photo:nth-child(19) { left: 70%;  animation-delay: 7.5s;  animation-duration: 20s; }
+    .photos-bg .float-photo:nth-child(20) { left: 96%;  animation-delay: 9s;    animation-duration: 17s; }
+
+    @keyframes floatPhoto {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+      5%   { opacity: 0.22; }
+      95%  { opacity: 0.22; }
+      100% { transform: translateY(-100vh) rotate(8deg); opacity: 0; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(214, 48, 49, 0.25);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+    }
+
+    .card.hidden {
+      display: none;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: #c9184a;
+      margin-bottom: 2rem;
+      line-height: 1.3;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 2rem;
+    }
+
+    .choice {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .choice-no {
+      min-width: 140px;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .no-placeholder {
+      color: #adb5bd;
+      font-size: 1.2rem;
+      font-weight: 600;
+      visibility: hidden;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-yes {
+      background: linear-gradient(135deg, #c9184a, #ff758f);
+      color: white;
+      box-shadow: 0 4px 15px rgba(201, 24, 74, 0.4);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 20px rgba(201, 24, 74, 0.5);
+    }
+
+    .btn-no {
+      background: linear-gradient(135deg, #c9184a, #ff4d6d);
+      color: white;
+      position: fixed;
+      z-index: 10;
+      padding: 1.15rem 2.25rem;
+      font-size: 1.3rem;
+      box-shadow: 0 6px 24px rgba(201, 24, 74, 0.55);
+      transition: left 0.15s ease-out, top 0.15s ease-out;
+    }
+
+    .btn-no:hover {
+      box-shadow: 0 8px 28px rgba(201, 24, 74, 0.65);
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #ff758f, #ffccd5);
+      border-radius: 16px;
+      color: #c9184a;
+      font-weight: 600;
+      font-size: 1.1rem;
+      animation: popIn 0.5s ease-out;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Success page */
+    .success-page {
+      display: none;
+      width: 100%;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .success-page.show {
+      display: block;
+      animation: fadeIn 0.7s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .success-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      box-shadow: 0 24px 64px rgba(201, 24, 74, 0.22);
+      text-align: center;
+      border: 2px solid rgba(201, 24, 74, 0.12);
+    }
+
+    .success-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .success-header .hearts-row {
+      font-size: 1.5rem;
+      letter-spacing: 0.4em;
+      margin-bottom: 0.75rem;
+      opacity: 0.9;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    .success-header h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3.2rem, 10vw, 5.5rem);
+      color: #c9184a;
+      line-height: 1.15;
+      text-shadow: 0 4px 24px rgba(201, 24, 74, 0.25);
+      animation: popText 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes popText {
+      from {
+        opacity: 0;
+        transform: scale(0.85) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .success-tagline {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #ff758f;
+      margin-top: 0.25rem;
+      font-weight: 600;
+      animation: popText 0.8s ease-out 0.35s both;
+    }
+
+    .success-message {
+      font-size: 1.05rem;
+      color: #6c757d;
+      line-height: 1.6;
+      margin-top: 1.5rem;
+      padding: 0 0.5rem;
+      animation: popText 0.8s ease-out 0.5s both;
+    }
+
+    .success-footer {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(201, 24, 74, 0.15);
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4rem;
+      color: #c9184a;
+      font-weight: 600;
+      animation: popText 0.8s ease-out 0.65s both;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-bg">
+    <span class="heart">❤️</span>
+    <span class="heart">💕</span>
+    <span class="heart">💖</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💗</span>
+    <span class="heart">💕</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💖</span>
+    <span class="heart">💕</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💗</span>
+    <span class="heart">💖</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💕</span>
+    <span class="heart">💖</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💕</span>
+    <span class="heart">💗</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💖</span>
+    <span class="heart">💕</span>
+    <span class="heart">❤️</span>
+    <span class="heart">💗</span>
+    <span class="heart">💖</span>
+    <span class="heart">❤️</span>
+  </div>
+
+  <!-- 20 small faded photos moving bottom to top (uses us1–us4 repeated) -->
+  <div class="photos-bg" aria-hidden="true">
+    <img class="float-photo" src="images/us1.jpg" alt="" />
+    <img class="float-photo" src="images/us2.jpg" alt="" />
+    <img class="float-photo" src="images/us3.jpg" alt="" />
+    <img class="float-photo" src="images/us4.jpg" alt="" />
+    <img class="float-photo" src="images/us1.jpg" alt="" />
+    <img class="float-photo" src="images/us2.jpg" alt="" />
+    <img class="float-photo" src="images/us3.jpg" alt="" />
+    <img class="float-photo" src="images/us4.jpg" alt="" />
+    <img class="float-photo" src="images/us1.jpg" alt="" />
+    <img class="float-photo" src="images/us2.jpg" alt="" />
+    <img class="float-photo" src="images/us3.jpg" alt="" />
+    <img class="float-photo" src="images/us4.jpg" alt="" />
+    <img class="float-photo" src="images/us1.jpg" alt="" />
+    <img class="float-photo" src="images/us2.jpg" alt="" />
+    <img class="float-photo" src="images/us3.jpg" alt="" />
+    <img class="float-photo" src="images/us4.jpg" alt="" />
+    <img class="float-photo" src="images/us1.jpg" alt="" />
+    <img class="float-photo" src="images/us2.jpg" alt="" />
+    <img class="float-photo" src="images/us3.jpg" alt="" />
+    <img class="float-photo" src="images/us4.jpg" alt="" />
+  </div>
+
+  <div class="card">
+    <h1>Will you be my Valentine? 💝</h1>
+    <p style="color: #6c757d; margin-bottom: 0.5rem;">There's only one right answer...</p>
+
+    <div class="buttons" id="buttonsContainer">
+      <div class="choice choice-yes">
+        <button class="btn btn-yes" id="yesBtn">Yes! 💕</button>
+      </div>
+      <div class="choice choice-no" id="noZone">
+        <span class="no-placeholder" aria-hidden="true">No</span>
+      </div>
+    </div>
+    <button class="btn btn-no" id="noBtn">No</button>
+
+    <div class="success-message" id="successMessage">
+      Yay! You made me the happiest! I love you! 💖
+    </div>
+  </div>
+
+  <div class="success-page" id="successPage">
+    <div class="success-card">
+      <div class="success-header">
+        <div class="hearts-row">💕 ❤️ 💖 ❤️ 💕</div>
+        <h2>You said Yes!</h2>
+        <p class="success-tagline">I'm the luckiest</p>
+      </div>
+      <p class="success-message">
+        Thank you for making me the happiest. Every moment with you is my favorite.
+      </p>
+      <div class="success-footer">
+        Forever & always 💝
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const noZone = document.getElementById('noZone');
+    const card = document.querySelector('.card');
+    const successPage = document.getElementById('successPage');
+
+    const triggerDistance = 15;
+    const padding = 20;
+
+    function positionNoAtZone() {
+      const zone = noZone.getBoundingClientRect();
+      noBtn.style.left = (zone.left + (zone.width - noBtn.offsetWidth) / 2) + 'px';
+      noBtn.style.top = (zone.top + (zone.height - noBtn.offsetHeight) / 2) + 'px';
+    }
+
+    function moveNoButton(e) {
+      const noRect = noBtn.getBoundingClientRect();
+      const btnCenterX = noRect.left + noRect.width / 2;
+      const btnCenterY = noRect.top + noRect.height / 2;
+
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+
+      const distanceX = cursorX - btnCenterX;
+      const distanceY = cursorY - btnCenterY;
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+      const radius = noRect.width / 2 + triggerDistance;
+
+      if (distance < radius) {
+        const maxX = window.innerWidth - noRect.width - padding;
+        const maxY = window.innerHeight - noRect.height - padding;
+        const newX = padding + Math.random() * Math.max(0, maxX - padding);
+        const newY = padding + Math.random() * Math.max(0, maxY - padding);
+
+        noBtn.style.left = newX + 'px';
+        noBtn.style.top = newY + 'px';
+      }
+    }
+
+    positionNoAtZone();
+    window.addEventListener('resize', positionNoAtZone);
+    document.addEventListener('mousemove', moveNoButton);
+
+    yesBtn.addEventListener('click', () => {
+      card.classList.add('hidden');
+      noBtn.style.display = 'none';
+      document.body.classList.add('success-view');
+      successPage.classList.add('show');
+    });
+
+
+    noBtn.addEventListener('mouseenter', () => {
+      const maxX = window.innerWidth - noBtn.offsetWidth - padding * 2;
+      const maxY = window.innerHeight - noBtn.offsetHeight - padding * 2;
+      const newX = padding + Math.random() * Math.max(0, maxX);
+      const newY = padding + Math.random() * Math.max(0, maxY);
+      noBtn.style.left = newX + 'px';
+      noBtn.style.top = newY + 'px';
+    });
+  </script>
+</body>
+</html>
