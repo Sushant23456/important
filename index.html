@@ -330,6 +330,30 @@
       animation: popText 0.8s ease-out 0.35s both;
     }
 
+    .gif-placeholder {
+      width: 100%;
+      max-width: 320px;
+      margin: 1.5rem auto 0;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #ffe4ec 0%, #ffccd5 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c9184a;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 2px dashed rgba(201, 24, 74, 0.25);
+      animation: popText 0.8s ease-out 0.4s both;
+    }
+
+    .gif-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
     .success-message {
       font-size: 1.05rem;
       color: #6c757d;
@@ -429,6 +453,9 @@
         <div class="hearts-row">💕 ❤️ 💖 ❤️ 💕</div>
         <h2>You said Yes!</h2>
         <p class="success-tagline">I'm the luckiest</p>
+      </div>
+      <div class="gif-placeholder" aria-hidden="true">
+        <img src="gifs/menglanpanda-menglan.gif" alt="Cute panda celebration" />
       </div>
       <p class="success-message">
         Thank you for making me the happiest. Every moment with you is my favorite.
