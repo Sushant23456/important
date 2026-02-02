@@ -148,10 +148,189 @@
       position: relative;
       z-index: 1;
       max-width: 420px;
+      transition: max-width 0.35s ease-out;
+    }
+
+    .card.step-with-image {
+      max-width: 560px;
     }
 
     .card.hidden {
       display: none;
+    }
+
+    .question-image-wrap {
+      display: none;
+      margin: 1.5rem auto;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffe4ec 0%, #ffccd5 100%);
+      aspect-ratio: 4/3;
+      max-height: 280px;
+      width: 100%;
+    }
+
+    .card.step-chatpate .question-image-wrap-chatpate,
+    .card.step-momo .question-image-wrap-momo {
+      display: block;
+    }
+
+    .question-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .valentine-figure {
+      display: none;
+      position: absolute;
+      left: -100px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100px;
+      height: 100px;
+      z-index: 2;
+      transition: transform 0.15s ease-out;
+    }
+
+    .card.step-valentine .valentine-figure {
+      display: block;
+    }
+
+    .valentine-figure .figure-head {
+      width: 88px;
+      height: 88px;
+      margin: 6px auto 0;
+      background: #fff;
+      border-radius: 50%;
+      border: 3px solid #333;
+      position: relative;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .valentine-figure .figure-ears {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 4px;
+      pointer-events: none;
+    }
+
+    .valentine-figure .figure-ear {
+      width: 28px;
+      height: 28px;
+      background: #333;
+      border-radius: 50%;
+    }
+
+    .valentine-figure .figure-eyes {
+      position: absolute;
+      top: 34%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .valentine-figure.eyes-heart .figure-eyes {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .valentine-figure .figure-eye {
+      width: 18px;
+      height: 20px;
+      background: #333;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .valentine-figure .figure-pupil {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      margin: -3px 0 0 -3px;
+      transition: transform 0.1s ease-out;
+    }
+
+    .valentine-figure .figure-eyes-hearts {
+      position: absolute;
+      top: 34%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      display: none;
+      justify-content: center;
+      gap: 20px;
+      pointer-events: none;
+    }
+
+    .valentine-figure.eyes-heart .figure-eyes-hearts {
+      display: flex;
+      animation: heartEyes 0.25s ease-out;
+    }
+
+    .valentine-figure .figure-eye-heart {
+      width: 18px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    @keyframes heartEyes {
+      from { opacity: 0; transform: translateX(-50%) scale(0.6); }
+      to { opacity: 1; transform: translateX(-50%) scale(1); }
+    }
+
+    .valentine-figure .figure-mouth {
+      position: absolute;
+      top: 58%;
+      left: 50%;
+      width: 24px;
+      height: 12px;
+      box-sizing: border-box;
+      transition: border 0.2s ease-out, transform 0.2s ease-out, height 0.2s ease-out, top 0.2s ease-out;
+    }
+
+    .valentine-figure.mouth-smile .figure-mouth {
+      border: 2px solid #333;
+      border-top: none;
+      border-radius: 0 0 50% 50%;
+      transform: translate(-50%, 0);
+    }
+
+    .valentine-figure.mouth-sad .figure-mouth {
+      border: 2px solid #333;
+      border-bottom: none;
+      border-radius: 50% 50% 0 0;
+      transform: translate(-50%, -12px);
+    }
+
+    .valentine-figure.mouth-neutral .figure-mouth {
+      width: 14px;
+      height: 2px;
+      top: 61%;
+      border: none;
+      border-bottom: 2px solid #333;
+      border-radius: 0;
+      transform: translate(-50%, 0);
     }
 
     h1 {
@@ -160,6 +339,12 @@
       color: #c9184a;
       margin-bottom: 2rem;
       line-height: 1.3;
+    }
+
+    .card h1 {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
 
     .buttons {
@@ -213,6 +398,12 @@
     .btn-yes:hover {
       transform: scale(1.08);
       box-shadow: 0 6px 20px rgba(201, 24, 74, 0.5);
+    }
+
+    .btn-yes.yes-runs-away {
+      position: fixed;
+      z-index: 10;
+      transition: left 0.15s ease-out, top 0.15s ease-out;
     }
 
     .btn-no {
@@ -363,6 +554,28 @@
       animation: popText 0.8s ease-out 0.5s both;
     }
 
+    .question-step {
+      font-size: 0.85rem;
+      color: #ff758f;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      min-height: 1.25rem;
+    }
+
+    .question-subtitle {
+      color: #6c757d;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h1.question-change {
+      animation: questionPop 0.4s ease-out;
+    }
+
+    @keyframes questionPop {
+      from { opacity: 0; transform: scale(0.95) translateY(6px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
     .success-footer {
       margin-top: 2rem;
       padding-top: 1.5rem;
@@ -373,9 +586,55 @@
       font-weight: 600;
       animation: popText 0.8s ease-out 0.65s both;
     }
+
+    /* Confetti / hearts burst */
+    .confetti-burst {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .confetti-burst .particle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -0.5em;
+      margin-top: -0.5em;
+      animation: burstOut 2.2s ease-out forwards;
+      opacity: 0;
+    }
+
+    .confetti-burst .particle.heart {
+      font-size: 22px;
+      margin-left: -0.5em;
+      margin-top: -0.5em;
+    }
+
+    .confetti-burst .particle.confetti {
+      width: 10px;
+      height: 10px;
+      margin-left: -5px;
+      margin-top: -5px;
+      border-radius: 1px;
+    }
+
+    @keyframes burstOut {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(var(--scale));
+      }
+    }
   </style>
 </head>
 <body>
+  <div id="confettiBurst" class="confetti-burst" aria-hidden="true"></div>
+
   <div class="hearts-bg">
     <span class="heart">❤️</span>
     <span class="heart">💕</span>
@@ -429,8 +688,34 @@
   </div>
 
   <div class="card">
-    <h1>Will you be my Valentine? 💝</h1>
-    <p style="color: #6c757d; margin-bottom: 0.5rem;">There's only one right answer...</p>
+    <div id="valentineFigure" class="valentine-figure" aria-hidden="true">
+      <div class="figure-head">
+        <div class="figure-ears">
+          <span class="figure-ear"></span>
+          <span class="figure-ear"></span>
+        </div>
+        <div class="figure-eyes">
+          <div class="figure-eye"><span class="figure-pupil" id="pupilL"></span></div>
+          <div class="figure-eye"><span class="figure-pupil" id="pupilR"></span></div>
+        </div>
+        <div class="figure-eyes-hearts" aria-hidden="true">
+          <span class="figure-eye-heart">❤️</span>
+          <span class="figure-eye-heart">❤️</span>
+        </div>
+        <div class="figure-mouth" aria-hidden="true"></div>
+      </div>
+    </div>
+    <p id="questionStep" class="question-step"></p>
+    <h1 id="questionTitle">Do you like pandas? 🐼</h1>
+    <p id="questionSubtitle" class="question-subtitle">There's only one right answer...</p>
+
+    <div id="questionImageWrap" class="question-image-wrap question-image-wrap-chatpate" aria-hidden="true">
+      <img src="images/your-chatpate.png" alt="Piro piro Chatpate" />
+    </div>
+
+    <div id="questionImageWrapMomo" class="question-image-wrap question-image-wrap-momo" aria-hidden="true">
+      <img src="images/momo-chowmein.png" alt="Momo chowmein" />
+    </div>
 
     <div class="buttons" id="buttonsContainer">
       <div class="choice choice-yes">
@@ -472,9 +757,127 @@
     const noZone = document.getElementById('noZone');
     const card = document.querySelector('.card');
     const successPage = document.getElementById('successPage');
+    const questionTitle = document.getElementById('questionTitle');
+    const questionSubtitle = document.getElementById('questionSubtitle');
+    const questionStep = document.getElementById('questionStep');
+
+    const QUESTIONS = [
+      { title: 'Do you like pandas? 🐼', subtitle: "There's only one right answer..." },
+      { title: 'Do you like piro piro Chatpate?', subtitle: 'Be honest...' },
+      { title: "Do you think I'm a little cool? 😎", subtitle: 'Just a little?' },
+      { title: 'Do you like moms momo chowmein?', subtitle: 'Be honest...' },
+      { title: 'Will you be my Valentine? 💝', subtitle: "There's only one right answer..." }
+    ];
+    const CHATPATE_STEP = 1;
+    const MOMO_STEP = 3;
+    const YES_RUNS_AWAY_STEPS = [CHATPATE_STEP, MOMO_STEP];
+    const VALENTINE_STEP = QUESTIONS.length - 1;
+    function isYesRunsAwayStep(step) { return YES_RUNS_AWAY_STEPS.includes(step); }
+    let currentStep = 0;
+    let lastYesMoveTime = 0;
+    let lastMouseX = 0;
+    let lastMouseY = 0;
+
+    function updateQuestionStep() {
+      questionStep.textContent = QUESTIONS.length > 1 ? `Question ${currentStep + 1} of ${QUESTIONS.length}` : '';
+    }
+    function showStep(step) {
+      const q = QUESTIONS[step];
+      questionTitle.textContent = q.title;
+      questionSubtitle.textContent = q.subtitle;
+      questionTitle.classList.remove('question-change');
+      void questionTitle.offsetWidth;
+      questionTitle.classList.add('question-change');
+      setTimeout(() => questionTitle.classList.remove('question-change'), 400);
+      updateQuestionStep();
+      if (isYesRunsAwayStep(step)) {
+        card.classList.add('step-with-image');
+        card.classList.toggle('step-chatpate', step === CHATPATE_STEP);
+        card.classList.toggle('step-momo', step === MOMO_STEP);
+        card.classList.remove('step-valentine');
+        requestAnimationFrame(() => {
+          const rect = yesBtn.getBoundingClientRect();
+          yesBtn.classList.add('yes-runs-away');
+          yesBtn.style.left = rect.left + 'px';
+          yesBtn.style.top = rect.top + 'px';
+        });
+      } else if (step === VALENTINE_STEP) {
+        card.classList.add('step-valentine');
+        card.classList.remove('step-with-image', 'step-chatpate', 'step-momo');
+        yesBtn.classList.remove('yes-runs-away');
+        yesBtn.style.left = '';
+        yesBtn.style.top = '';
+        if (valentineFigure) {
+          valentineFigure.classList.remove('eyes-heart', 'mouth-smile', 'mouth-sad');
+          valentineFigure.classList.add('mouth-neutral');
+        }
+      } else {
+        card.classList.remove('step-with-image', 'step-chatpate', 'step-momo', 'step-valentine');
+        yesBtn.classList.remove('yes-runs-away');
+        yesBtn.style.left = '';
+        yesBtn.style.top = '';
+      }
+      positionNoAtZone();
+    }
+    updateQuestionStep();
 
     const triggerDistance = 15;
     const padding = 20;
+    const noMoveCooldownMs = 400;
+    const minDistanceFromCursor = 120;
+    let lastNoMoveTime = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    const valentineFigure = document.getElementById('valentineFigure');
+    const pupilL = document.getElementById('pupilL');
+    const pupilR = document.getElementById('pupilR');
+    const EYES_HEART_RADIUS = 100;
+
+    function updateValentineFigure(e) {
+      if (currentStep !== VALENTINE_STEP || !valentineFigure || !card.classList.contains('step-valentine')) return;
+      const rect = valentineFigure.getBoundingClientRect();
+      const headCenterX = rect.left + rect.width / 2;
+      const headCenterY = rect.top + rect.height / 2;
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+      const distToYes = Math.hypot(
+        cursorX - (yesBtn.getBoundingClientRect().left + yesBtn.offsetWidth / 2),
+        cursorY - (yesBtn.getBoundingClientRect().top + yesBtn.offsetHeight / 2)
+      );
+      const nearYes = distToYes < EYES_HEART_RADIUS;
+      valentineFigure.classList.toggle('eyes-heart', nearYes);
+
+      const noRect = noBtn.getBoundingClientRect();
+      const distToNo = Math.hypot(
+        cursorX - (noRect.left + noRect.width / 2),
+        cursorY - (noRect.top + noRect.height / 2)
+      );
+      const MOUTH_SAD_RADIUS = 90;
+      const nearNo = distToNo < MOUTH_SAD_RADIUS;
+
+      valentineFigure.classList.remove('mouth-smile', 'mouth-sad', 'mouth-neutral');
+      if (nearYes) valentineFigure.classList.add('mouth-smile');
+      else if (nearNo) valentineFigure.classList.add('mouth-sad');
+      else valentineFigure.classList.add('mouth-neutral');
+
+      const dx = (cursorX - headCenterX) / Math.max(rect.width, 1);
+      const dy = (cursorY - headCenterY) / Math.max(rect.height, 1);
+      const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+      const px = clamp(dx * 4, -3, 3);
+      const py = clamp(dy * 4, -3, 3);
+      if (pupilL && pupilR) {
+        pupilL.style.transform = `translate(${px}px, ${py}px)`;
+        pupilR.style.transform = `translate(${px}px, ${py}px)`;
+      }
+      const tilt = clamp(dy * 8, -12, 12);
+      valentineFigure.style.transform = `translateY(-50%) rotate(${tilt}deg)`;
+    }
+
+    document.addEventListener('mousemove', updateValentineFigure);
 
     function positionNoAtZone() {
       const zone = noZone.getBoundingClientRect();
@@ -483,6 +886,9 @@
     }
 
     function moveNoButton(e) {
+      if (isYesRunsAwayStep(currentStep)) return;
+      if (Date.now() - lastNoMoveTime < noMoveCooldownMs) return;
+
       const noRect = noBtn.getBoundingClientRect();
       const btnCenterX = noRect.left + noRect.width / 2;
       const btnCenterY = noRect.top + noRect.height / 2;
@@ -498,33 +904,156 @@
       if (distance < radius) {
         const maxX = window.innerWidth - noRect.width - padding;
         const maxY = window.innerHeight - noRect.height - padding;
-        const newX = padding + Math.random() * Math.max(0, maxX - padding);
-        const newY = padding + Math.random() * Math.max(0, maxY - padding);
-
+        let newX = padding + Math.random() * Math.max(0, maxX - padding);
+        let newY = padding + Math.random() * Math.max(0, maxY - padding);
+        for (let tries = 0; tries < 15; tries++) {
+          newX = padding + Math.random() * Math.max(0, maxX - padding);
+          newY = padding + Math.random() * Math.max(0, maxY - padding);
+          const dx = (newX + noRect.width / 2) - cursorX;
+          const dy = (newY + noRect.height / 2) - cursorY;
+          if (Math.sqrt(dx * dx + dy * dy) >= minDistanceFromCursor) break;
+        }
         noBtn.style.left = newX + 'px';
         noBtn.style.top = newY + 'px';
+        lastNoMoveTime = Date.now();
+      }
+    }
+
+    function moveYesButton(e) {
+      if (!isYesRunsAwayStep(currentStep)) return;
+      if (Date.now() - lastYesMoveTime < noMoveCooldownMs) return;
+
+      const yesRect = yesBtn.getBoundingClientRect();
+      const btnCenterX = yesRect.left + yesRect.width / 2;
+      const btnCenterY = yesRect.top + yesRect.height / 2;
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+      const distanceX = cursorX - btnCenterX;
+      const distanceY = cursorY - btnCenterY;
+      const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+      const radius = yesRect.width / 2 + triggerDistance;
+
+      if (distance < radius) {
+        const maxX = window.innerWidth - yesRect.width - padding;
+        const maxY = window.innerHeight - yesRect.height - padding;
+        let newX = padding + Math.random() * Math.max(0, maxX - padding);
+        let newY = padding + Math.random() * Math.max(0, maxY - padding);
+        for (let tries = 0; tries < 15; tries++) {
+          newX = padding + Math.random() * Math.max(0, maxX - padding);
+          newY = padding + Math.random() * Math.max(0, maxY - padding);
+          const dx = (newX + yesRect.width / 2) - cursorX;
+          const dy = (newY + yesRect.height / 2) - cursorY;
+          if (Math.sqrt(dx * dx + dy * dy) >= minDistanceFromCursor) break;
+        }
+        yesBtn.style.left = newX + 'px';
+        yesBtn.style.top = newY + 'px';
+        lastYesMoveTime = Date.now();
       }
     }
 
     positionNoAtZone();
     window.addEventListener('resize', positionNoAtZone);
     document.addEventListener('mousemove', moveNoButton);
+    document.addEventListener('mousemove', moveYesButton);
+
+    const HEARTS = ['❤️', '💕', '💖', '💗', '💝'];
+    const CONFETTI_COLORS = ['#c9184a', '#ff758f', '#ffccd5', '#ff4d6d', '#fff0f3', '#e63946'];
+
+    function triggerConfettiBurst() {
+      const container = document.getElementById('confettiBurst');
+      container.innerHTML = '';
+      const rect = yesBtn.getBoundingClientRect();
+      const originX = rect.left + rect.width / 2;
+      const originY = rect.top + rect.height / 2;
+
+      const particleCount = 55;
+      for (let i = 0; i < particleCount; i++) {
+        const isHeart = Math.random() < 0.6;
+        const el = document.createElement(isHeart ? 'span' : 'div');
+        el.className = 'particle ' + (isHeart ? 'heart' : 'confetti');
+        if (isHeart) {
+          el.textContent = HEARTS[Math.floor(Math.random() * HEARTS.length)];
+        } else {
+          el.style.background = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+        }
+        const angle = (Math.PI * 2 * Math.random()) - Math.PI / 2;
+        const velocity = 120 + Math.random() * 180;
+        const dx = Math.cos(angle) * velocity + (Math.random() - 0.5) * 80;
+        const dy = Math.sin(angle) * velocity - 80 + Math.random() * 200;
+        el.style.left = originX + 'px';
+        el.style.top = originY + 'px';
+        el.style.setProperty('--dx', dx + 'px');
+        el.style.setProperty('--dy', dy + 'px');
+        el.style.setProperty('--rot', (Math.random() - 0.5) * 720 + 'deg');
+        el.style.setProperty('--scale', 0.6 + Math.random() * 0.6);
+        el.style.animationDelay = Math.random() * 0.15 + 's';
+        container.appendChild(el);
+      }
+      setTimeout(() => { container.innerHTML = ''; }, 2300);
+    }
 
     yesBtn.addEventListener('click', () => {
-      card.classList.add('hidden');
-      noBtn.style.display = 'none';
-      document.body.classList.add('success-view');
-      successPage.classList.add('show');
+      if (currentStep < QUESTIONS.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      } else {
+        triggerConfettiBurst();
+        card.classList.add('hidden');
+        noBtn.style.display = 'none';
+        document.body.classList.add('success-view');
+        successPage.classList.add('show');
+      }
     });
 
 
-    noBtn.addEventListener('mouseenter', () => {
+    noBtn.addEventListener('mouseenter', (e) => {
+      if (isYesRunsAwayStep(currentStep)) return;
+      if (Date.now() - lastNoMoveTime < noMoveCooldownMs) return;
+      lastNoMoveTime = Date.now();
       const maxX = window.innerWidth - noBtn.offsetWidth - padding * 2;
       const maxY = window.innerHeight - noBtn.offsetHeight - padding * 2;
-      const newX = padding + Math.random() * Math.max(0, maxX);
-      const newY = padding + Math.random() * Math.max(0, maxY);
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+      let newX = padding + Math.random() * Math.max(0, maxX);
+      let newY = padding + Math.random() * Math.max(0, maxY);
+      for (let tries = 0; tries < 15; tries++) {
+        newX = padding + Math.random() * Math.max(0, maxX);
+        newY = padding + Math.random() * Math.max(0, maxY);
+        const dx = (newX + noBtn.offsetWidth / 2) - cursorX;
+        const dy = (newY + noBtn.offsetHeight / 2) - cursorY;
+        if (Math.sqrt(dx * dx + dy * dy) >= minDistanceFromCursor) break;
+      }
       noBtn.style.left = newX + 'px';
       noBtn.style.top = newY + 'px';
+    });
+
+    yesBtn.addEventListener('mouseenter', (e) => {
+      if (!isYesRunsAwayStep(currentStep)) return;
+      if (Date.now() - lastYesMoveTime < noMoveCooldownMs) return;
+      lastYesMoveTime = Date.now();
+      const maxX = window.innerWidth - yesBtn.offsetWidth - padding * 2;
+      const maxY = window.innerHeight - yesBtn.offsetHeight - padding * 2;
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+      let newX = padding + Math.random() * Math.max(0, maxX);
+      let newY = padding + Math.random() * Math.max(0, maxY);
+      for (let tries = 0; tries < 15; tries++) {
+        newX = padding + Math.random() * Math.max(0, maxX);
+        newY = padding + Math.random() * Math.max(0, maxY);
+        const dx = (newX + yesBtn.offsetWidth / 2) - cursorX;
+        const dy = (newY + yesBtn.offsetHeight / 2) - cursorY;
+        if (Math.sqrt(dx * dx + dy * dy) >= minDistanceFromCursor) break;
+      }
+      yesBtn.style.left = newX + 'px';
+      yesBtn.style.top = newY + 'px';
+    });
+
+    noBtn.addEventListener('click', (e) => {
+      if (isYesRunsAwayStep(currentStep)) {
+        e.preventDefault();
+        currentStep++;
+        showStep(currentStep);
+      }
     });
   </script>
 </body>
